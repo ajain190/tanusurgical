@@ -1,0 +1,22 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Editor Files
+.vscode/
+.idea/
+*.code-workspace
+
+# Node modules (if using any build tools)
+node_modules/
+package-lock.json
+
+# Build outputs
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*

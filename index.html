@@ -626,9 +626,12 @@
                     <form id="rfq-form" action="https://formsubmit.co/099d7ed98f6344e7ff2fc80a506e92ed" method="POST" class="space-y-6 pt-4 border-t border-slate-800">
                         <input type="hidden" name="_subject" value="New RFQ from Tanu Surgical Website">
                         <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_captcha" value="true">
                         <input type="hidden" name="_next" value="https://ajain190.github.io/tanusurgical/?submitted=true">
-                        <input type="hidden" name="_autoresponse" value="Thank you for contacting Tanu Surgical Industries. Your RFQ has been received and we will reply shortly.">
+
+                        <div id="rfq-success-message" class="hidden rounded-2xl border border-emerald-300 bg-emerald-50 px-6 py-4 text-sm text-emerald-900">
+                            <strong>RFQ sent successfully!</strong> Thank you. Your request has been received and we will contact you shortly.
+                        </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div>
@@ -903,6 +906,16 @@
             }
         }
 
+        function showRfqSuccessMessage() {
+            const params = new URLSearchParams(window.location.search);
+            if (params.get('submitted') === 'true') {
+                const successEl = document.getElementById('rfq-success-message');
+                if (successEl) {
+                    successEl.classList.remove('hidden');
+                }
+            }
+        }
+
         function updateCarouselDots() {
             const carousel = document.getElementById('product-carousel');
             const dots = document.querySelectorAll('#carousel-dots button');
@@ -1051,6 +1064,7 @@
             }
 
             createCarouselDots();
+            showRfqSuccessMessage();
         });
 
         // Close modal on Escape key press

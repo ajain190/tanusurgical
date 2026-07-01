@@ -623,12 +623,9 @@
                         </p>
                     </div>
 
-                    <form id="rfq-form" action="https://formsubmit.co/aajj5654@gmail.com" method="POST" class="space-y-6 pt-4 border-t border-slate-800">
-                        <input type="hidden" name="_subject" value="New RFQ from Tanu Surgical Website">
-                        <input type="hidden" name="_template" value="table">
-                        <input type="hidden" name="_captcha" value="true">
-                        <input type="hidden" name="_next" value="https://ajain190.github.io/tanusurgical/?submitted=true">
-
+                    <form id="rfq-form" action="https://formsubmit.co/tanusurgical.industries@gmail.com" method="POST" class="space-y-6 pt-4 border-t border-slate-800">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_subject" value="New RFQ Submission from Tanu Surgical Site">
                         <div id="rfq-success-message" class="hidden rounded-2xl border border-emerald-300 bg-emerald-50 px-6 py-4 text-sm text-emerald-900">
                             <strong>RFQ sent successfully!</strong> Thank you. Your request has been received and we will contact you shortly.
                         </div>
@@ -906,15 +903,6 @@
             }
         }
 
-        function showRfqSuccessMessage() {
-            const params = new URLSearchParams(window.location.search);
-            if (params.get('submitted') === 'true') {
-                const successEl = document.getElementById('rfq-success-message');
-                if (successEl) {
-                    successEl.classList.remove('hidden');
-                }
-            }
-        }
 
         function updateCarouselDots() {
             const carousel = document.getElementById('product-carousel');
@@ -1064,7 +1052,6 @@
             }
 
             createCarouselDots();
-            showRfqSuccessMessage();
         });
 
         // Close modal on Escape key press

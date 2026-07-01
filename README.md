@@ -1,21 +1,37 @@
-# DB2 Python Agent
+# Tanu Surgical Industries
 
-This folder contains Python-based DB2 automation scripts for remote DBA tasks.
+Welcome to the official website of **Tanu Surgical Industries** - Premium Hospital & Scientific Appliances.
 
-## What it does
-- Uses values from `.env` for host, user, password, and instance
-- Automatically connects to the remote DB2 server via PuTTY `plink`
-- Supports commands such as:
-  - list databases
-  - count tables in a database
+## About Us
 
-## Run it
-From PowerShell or any terminal in this folder:
+Tanu Surgical Industries specializes in providing high-quality hospital and scientific appliances for medical professionals and institutions.
 
-```powershell
-python .\scripts\db2_list_db_directory.py
-```
+## Website Features
 
-## Notes
-- The scripts are Python-based and require Python and PuTTY `plink.exe` on the local machine.
-- The connection is non-interactive and uses the password from `.env`.
+- Modern, responsive design
+- Product showcase with images
+- Professional medical industry presentation
+- Built with Tailwind CSS for optimal performance
+
+## Products
+
+We offer a range of surgical and medical instruments including:
+- Autoclaves
+- Dressing Drums
+- Instrument Boxes
+- Instrument Trays
+- Trolleys
+- And more...
+
+## Local Development
+
+To view the website locally, simply open `index.html` in your web browser.
+
+## Deployment
+
+This website is deployed and accessible online. Visit our site to explore our complete product range and services.
+
+---
+
+**Tanu Surgical Industries**  
+Premium Hospital & Scientific Appliances

@@ -56,6 +56,12 @@
             display: none;
         }
 
+        #product-carousel {
+            -webkit-overflow-scrolling: touch;
+            touch-action: pan-x;
+            scroll-snap-type: none;
+        }
+
         .carousel-dot.active {
             background-color: #0f4c81;
             width: 0.8rem;
@@ -329,7 +335,7 @@
                     <i class="fa-solid fa-chevron-right"></i>
                 </button>
 
-                <div id="product-carousel" class="grid grid-flow-col auto-cols-[minmax(320px,1fr)] gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-hide px-2 py-2">
+                <div id="product-carousel" class="grid grid-flow-col auto-cols-[minmax(320px,1fr)] gap-6 overflow-x-auto scroll-smooth scrollbar-hide px-2 py-2">
                     <!-- 1. Pressure Autoclaves -->
                     <div class="snap-start bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden hover:shadow-md transition-shadow duration-300 flex flex-col h-full min-w-[320px]">
                         <div class="h-48 overflow-hidden bg-slate-100 product-image-container" onclick="openImageModal('pics/autoclaves.jpg', 'Pressure Autoclaves')">
@@ -922,6 +928,12 @@
             cards[index].scrollIntoView({ behavior: 'smooth', inline: 'start' });
         }
 
+        let autoScrollPaused = false;
+        let autoScrollDirection = 1;
+        let autoScrollFrameId;
+        let autoScrollLastTimestamp;
+        let autoScrollResumeTimeout;
+
         function createCarouselDots() {
             const carousel = document.getElementById('product-carousel');
             const dotsContainer = document.getElementById('carousel-dots');
@@ -933,12 +945,83 @@
                 button.type = 'button';
                 button.className = 'carousel-dot w-3 h-3 rounded-full bg-slate-300 transition-colors focus:outline-none focus:ring-2 focus:ring-medical-400';
                 button.setAttribute('aria-label', `Show slide ${index + 1}`);
-                button.addEventListener('click', () => scrollCarouselToIndex(index));
+                button.addEventListener('click', () => {
+                    pauseAutoScroll();
+                    scrollCarouselToIndex(index);
+                    resumeAutoScrollAfterDelay();
+                });
                 dotsContainer.appendChild(button);
             });
 
-            carousel.addEventListener('scroll', updateCarouselDots);
+            carousel.addEventListener('scroll', () => {
+                updateCarouselDots();
+                pauseAutoScroll();
+                resumeAutoScrollAfterDelay();
+            }, { passive: true });
+
+            carousel.addEventListener('pointerenter', pauseAutoScroll);
+            carousel.addEventListener('pointerleave', resumeAutoScrollAfterDelay);
+            carousel.addEventListener('touchstart', pauseAutoScroll, { passive: true });
+            carousel.addEventListener('touchend', resumeAutoScrollAfterDelay);
+
             updateCarouselDots();
+            startAutoScroll();
+        }
+
+        function pauseAutoScroll() {
+            autoScrollPaused = true;
+            autoScrollLastTimestamp = null;
+            if (autoScrollResumeTimeout) {
+                clearTimeout(autoScrollResumeTimeout);
+                autoScrollResumeTimeout = null;
+            }
+        }
+
+        function resumeAutoScrollAfterDelay() {
+            if (autoScrollResumeTimeout) {
+                clearTimeout(autoScrollResumeTimeout);
+            }
+            autoScrollResumeTimeout = setTimeout(() => {
+                autoScrollPaused = false;
+            }, 2000);
+        }
+
+        function startAutoScroll() {
+            if (autoScrollFrameId) {
+                return;
+            }
+
+            function step(timestamp) {
+                const carousel = document.getElementById('product-carousel');
+                if (!carousel) {
+                    autoScrollFrameId = requestAnimationFrame(step);
+                    return;
+                }
+
+                if (!autoScrollLastTimestamp) {
+                    autoScrollLastTimestamp = timestamp;
+                }
+
+                const elapsed = timestamp - autoScrollLastTimestamp;
+                autoScrollLastTimestamp = timestamp;
+
+                if (!autoScrollPaused) {
+                    const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+                    const speed = 0.04; // px per ms
+                    carousel.scrollLeft += autoScrollDirection * speed * elapsed;
+
+                    if (carousel.scrollLeft >= maxScrollLeft - 1) {
+                        autoScrollDirection = -1;
+                    } else if (carousel.scrollLeft <= 1) {
+                        autoScrollDirection = 1;
+                    }
+                }
+
+                updateCarouselDots();
+                autoScrollFrameId = requestAnimationFrame(step);
+            }
+
+            autoScrollFrameId = requestAnimationFrame(step);
         }
 
         function closeImageModal() {

@@ -623,27 +623,33 @@
                         </p>
                     </div>
 
-                    <form id="rfq-form" action="https://formsubmit.co/aajj5654@gmail.com" method="POST" class="space-y-6 pt-4 border-t border-slate-800">
+                    <form id="rfq-form" action="https://formsubmit.co/099d7ed98f6344e7ff2fc80a506e92ed" method="POST" class="space-y-6 pt-4 border-t border-slate-800">
+                        <input type="hidden" name="_subject" value="New RFQ from Tanu Surgical Website">
+                        <input type="hidden" name="_template" value="table">
+                        <input type="hidden" name="_captcha" value="false">
+                        <input type="hidden" name="_next" value="https://ajain190.github.io/tanusurgical/?submitted=true">
+                        <input type="hidden" name="_autoresponse" value="Thank you for contacting Tanu Surgical Industries. Your RFQ has been received and we will reply shortly.">
+
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Institution Name</label>
-                                <input type="text" id="wiz-org" required placeholder="Hospital / Clinical Entity" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-medical-500 placeholder:text-slate-600 transition-colors">
+                                <input type="text" id="wiz-org" name="organization" required placeholder="Hospital / Clinical Entity" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-medical-500 placeholder:text-slate-600 transition-colors">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Authorized Representative</label>
-                                <input type="text" id="wiz-name" required placeholder="Full Name" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-medical-500 placeholder:text-slate-600 transition-colors">
+                                <input type="text" id="wiz-name" name="name" required placeholder="Full Name" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-medical-500 placeholder:text-slate-600 transition-colors">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Direct Contact Mobile</label>
-                                <input type="tel" id="wiz-phone" required placeholder="Country Code Included" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-medical-500 placeholder:text-slate-600 transition-colors">
+                                <input type="tel" id="wiz-phone" name="phone" required placeholder="Country Code Included" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-medical-500 placeholder:text-slate-600 transition-colors">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Corporate Email Endpoint</label>
-                                <input type="email" id="wiz-email" required placeholder="purchasing@institution.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-medical-500 placeholder:text-slate-600 transition-colors">
+                                <input type="email" id="wiz-email" name="email" required placeholder="purchasing@institution.com" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-medical-500 placeholder:text-slate-600 transition-colors">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Primary Equipment Target Specialty</label>
-                                <select id="wiz-specialty" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-medical-500 transition-colors">
+                                <select id="wiz-specialty" name="specialty" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-medical-500 transition-colors">
                                     <option value="Pressure Autoclaves">Pressure Autoclaves</option>
                                     <option value="Medical Trolleys">Medical Trolleys</option>
                                     <option value="Instrument Boxes">Instrument Boxes</option>
@@ -653,7 +659,7 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Estimated Procurement Volume</label>
-                                <select id="wiz-volume" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-medical-500 transition-colors">
+                                <select id="wiz-volume" name="volume" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-medical-500 transition-colors">
                                     <option value="Standard Trial Consignment Portfolio">Standard Trial Consignment Portfolio</option>
                                     <option value="Medium Commercial Institutional Volume">Medium Commercial Institutional Volume</option>
                                     <option value="High-Volume Full Ward Turnkey Facility Deployment">High-Volume Full Ward Turnkey Facility Deployment</option>
@@ -663,7 +669,7 @@
 
                         <div>
                             <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Custom Sizing, Dimensions, or Material Notes</label>
-                            <textarea id="wiz-notes" rows="4" placeholder="Specify any unique structural requests or custom configurations needed here..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-medical-500 placeholder:text-slate-600 transition-colors resize-none"></textarea>
+                            <textarea id="wiz-notes" name="message" rows="4" placeholder="Specify any unique structural requests or custom configurations needed here..." class="w-full bg-slate-950 border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-medical-500 placeholder:text-slate-600 transition-colors resize-none"></textarea>
                         </div>
 
                         <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs text-slate-400 space-y-1">

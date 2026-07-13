@@ -36,9 +36,24 @@ module.exports = async function handler(req, res) {
       body: bodyText
     });
 
-    res.status(200).json({ ok: true, message: 'WhatsApp notification sent' });
+    const emailTo = process.env.RFQ_EMAIL_TO || 'tanu.surgicals@gmail.com';
+    const emailSubject = `New RFQ Submission from ${organization || 'Website'}`;
+    const emailBody = `Organization: ${organization || 'N/A'}\nRepresentative: ${name || 'N/A'}\nPhone: ${phone || 'N/A'}\nEmail: ${email || 'N/A'}\nSpecialty: ${specialty || 'N/A'}\nVolume: ${volume || 'N/A'}\n\nMessage:\n${message || 'N/A'}`;
+
+    if (process.env.SENDGRID_API_KEY) {
+      const sgMail = require('@sendgrid/mail');
+      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+      await sgMail.send({
+        to: emailTo,
+        from: process.env.SENDGRID_FROM_EMAIL || 'no-reply@tanusurgical.vercel.app',
+        subject: emailSubject,
+        text: emailBody
+      });
+    }
+
+    res.status(200).json({ ok: true, message: 'WhatsApp and email notifications sent' });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ ok: false, message: 'Failed to send WhatsApp notification' });
+    res.status(500).json({ ok: false, message: 'Failed to send notifications' });
   }
 };

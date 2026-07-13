@@ -2,6 +2,7 @@
   "name": "tanu-surgical-factory-site",
   "private": true,
   "dependencies": {
+    "@sendgrid/mail": "^8.0.0",
     "twilio": "^5.0.0"
   }
 }

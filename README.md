@@ -43,13 +43,16 @@ Set these in your Vercel project:
 - TWILIO_AUTH_TOKEN
 - TWILIO_WHATSAPP_FROM (for example `whatsapp:+14155238886`)
 - TWILIO_WHATSAPP_TO (your WhatsApp-enabled number, for example `whatsapp:+9194xxxxxxx`)
+- RFQ_EMAIL_TO (the email address to receive the fallback email; default is `tanu.surgicals@gmail.com`)
+- SENDGRID_API_KEY (optional, used for direct email delivery)
+- SENDGRID_FROM_EMAIL (optional, for example `no-reply@tanusurgical.vercel.app`)
 
 ### Install dependency
 
-The endpoint uses the Twilio SDK:
+The endpoint uses the Twilio SDK and SendGrid SDK:
 
 ```bash
-npm install twilio
+npm install twilio @sendgrid/mail
 ```
 
 If you prefer a different provider, replace the Twilio client calls in api/whatsapp-notify.js with your provider-specific implementation.

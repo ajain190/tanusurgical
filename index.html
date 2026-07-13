@@ -870,6 +870,16 @@
                 message: formData.get('message') || ''
             };
 
+            fetch('/api/email-notify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            }).catch(function(error) {
+                console.error('Email notification failed:', error);
+            });
+
             fetch('/api/whatsapp-notify', {
                 method: 'POST',
                 headers: {

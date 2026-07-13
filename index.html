@@ -623,9 +623,10 @@
                         </p>
                     </div>
 
-                    <form id="rfq-form" action="https://formsubmit.co/tanu.surgicals@gmail.com" method="POST" class="space-y-6 pt-4 border-t border-slate-800">
+                    <form id="rfq-form" action="https://formsubmit.co/tanu.surgicals@gmail.com" method="POST" onsubmit="handleRfqSubmit(event)" class="space-y-6 pt-4 border-t border-slate-800">
                         <input type="hidden" name="_captcha" value="false">
                         <input type="hidden" name="_subject" value="New RFQ Submission from Tanu Surgical Site">
+                        <input type="hidden" name="_next" value="https://tanusurgical.vercel.app/?submitted=1">
                         <div id="rfq-success-message" class="hidden rounded-2xl border border-emerald-300 bg-emerald-50 px-6 py-4 text-sm text-emerald-900">
                             <strong>RFQ sent successfully!</strong> Thank you. Your request has been received and we will contact you shortly.
                         </div>
@@ -854,6 +855,30 @@
                 icon.classList.remove('bg-white', 'text-slate-500');
                 icon.classList.add('bg-medical-500', 'text-white');
             }
+        }
+
+        function handleRfqSubmit(event) {
+            const form = event.currentTarget;
+            const formData = new FormData(form);
+            const payload = {
+                organization: formData.get('organization') || '',
+                name: formData.get('name') || '',
+                phone: formData.get('phone') || '',
+                email: formData.get('email') || '',
+                specialty: formData.get('specialty') || '',
+                volume: formData.get('volume') || '',
+                message: formData.get('message') || ''
+            };
+
+            fetch('/api/whatsapp-notify', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            }).catch(function(error) {
+                console.error('WhatsApp notification failed:', error);
+            });
         }
 
         function generateRfqPayload(event) {
